@@ -10,4 +10,4 @@ lazy val root = (project in file(".")).aggregate(tupleMacros, tupleSamples)
 
 lazy val tupleMacros = project.in(file("tuple-macros"))
 
-lazy val tupleSamples = project.in(file("tuple-samples")).dependsOn(macros)
+lazy val tupleSamples = project.in(file("tuple-samples")).dependsOn(tupleMacros)
