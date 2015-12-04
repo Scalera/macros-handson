@@ -1,17 +1,21 @@
 package scalera.examples
 
-import scalera.tuple.macros.Tuple
+import scalera.macros._
 
 object Examples extends App {
 
-  val t2 = Tuple(true,"hi")
+  val entities =
+    Entity("MyEntity")(
+      "att1" -> 2,
+      "att2" -> "Hi",
+      "att3" -> List(true))
 
-  val t3 = Tuple("hi",3,List(1,2,3))
+  import entities._
 
-  val t4 = Tuple("hi",4,List(1,2),List(true))
+  val myEntity = MyEntity(2,"bye",List(false,false))
 
-  val t5 = Tuple("bye",false, Array(3),Set(1,2,3),5)
+  val x = myEntity.att1
 
-  println
+  assert(myEntity.isInstanceOf[Serializable with Product],"It should be serializable")
 
 }
