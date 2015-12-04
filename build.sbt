@@ -1,13 +1,13 @@
 organization := "scalera"
 
-name := "tuple"
+name := "macros-handson"
 
 version := "1.0"
 
 scalaVersion := "2.11.5"
 
-lazy val root = (project in file(".")).aggregate(tupleMacros, tupleSamples)
+lazy val root = (project in file(".")).aggregate(macros, examples)
 
-lazy val tupleMacros = project.in(file("tuple-macros"))
+lazy val macros = project.in(file("macros"))
 
-lazy val tupleSamples = project.in(file("tuple-samples")).dependsOn(tupleMacros)
+lazy val examples = project.in(file("examples")).dependsOn(macros)

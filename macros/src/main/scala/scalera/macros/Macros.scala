@@ -1,4 +1,4 @@
-package scalera.tuple.macros
+package scalera.macros
 
 import scala.reflect.macros._
 

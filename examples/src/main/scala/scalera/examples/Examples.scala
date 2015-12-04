@@ -1,8 +1,8 @@
-package scalera.tuple.samples
+package scalera.examples
 
 import scalera.tuple.macros.Tuple
 
-object Samples extends App {
+object Examples extends App {
 
   val t2 = Tuple(true,"hi")
 

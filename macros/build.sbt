@@ -1,6 +1,6 @@
 organization := "scalera"
 
-name := "tuple-macros"
+name := "macros"
 
 version := "1.0"
 
