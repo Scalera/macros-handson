@@ -7,7 +7,7 @@ object Macros {
   def entityImpl(
                   c: whitebox.Context)(
                   name: c.Expr[String])(
-                  attributes: c.Expr[(String, Any)]*) = {
+                  attributes: c.Expr[(String, Rep[_])]*) = {
     import c.universe._
     c.Expr[Any]( q"""new {
       ${classExpr(c)(name)(attributes:_*)}
@@ -17,16 +17,16 @@ object Macros {
   def classExpr(
                  c: whitebox.Context)(
                  name: c.Expr[String])(
-                 attributes: c.Expr[(String, Any)]*) = {
+                 attributes: c.Expr[(String, Rep[_])]*) = {
     import c.universe._
     val members =
       attributes.map{ att =>
-        c.eval(c.Expr[(String,Any)](c.untypecheck(att.tree))) match {
+        c.eval(c.Expr[(String,Rep[_])](c.untypecheck(att.tree))) match {
           case (attName,value) =>
             ValDef(
               Modifiers(Flag.CASEACCESSOR | Flag.PARAMACCESSOR),
               TermName(attName),
-              Ident(TypeName("Any")),//TODO Infer type from value.
+              Ident(TypeName(value.tpe.in(c.mirror).tpe.toString)),
               EmptyTree)
         }
       }.toList
