@@ -30,24 +30,7 @@ object Macros {
               EmptyTree)
         }
       }.toList
-    ClassDef(
-      Modifiers(Flag.CASE),
-      TypeName(c.eval(name)),
-      List(),
-      Template(
-        List(
-          Select(Ident(TermName("scala")), TypeName("Product")),
-          Select(Ident(TermName("scala")), TypeName("Serializable"))),
-        noSelfType,
-        members :::
-        List(
-          DefDef(
-            Modifiers(),
-            termNames.CONSTRUCTOR,
-            List(),
-            List(members),
-            TypeTree(),
-            Block(List(pendingSuperCall), Literal(Constant(())))))))
+    c.Expr(q"""case class ${TypeName(c.eval(name))}(..$members)""")
   }
 
 }
